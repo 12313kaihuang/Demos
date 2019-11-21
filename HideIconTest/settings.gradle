@@ -1,0 +1,2 @@
+include ':app', ':hideiconapp'
+rootProject.name='HideIconTest'

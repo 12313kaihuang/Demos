@@ -5,3 +5,4 @@
 * [属性动画Demo](https://github.com/12313kaihuang/Demo/tree/master/AnimatorTest)
 * [通知Demo](/NotificationTest)
 * [RecyclerView之DiffUtil](/DiffUtilTest)
+* [隐式启动与隐藏图标](/HideIconTest)
