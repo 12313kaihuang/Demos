@@ -1,12 +1,7 @@
 # RecyclerView之ListAdapter
-基于`MVVM`的`ListAdapter`实际应用的一个小demo。
+`ListAdapter`实际应用的一个小demo。<br/>
 
-**技术要点**：<br/>
-* **DataBinding**
-* **Room**
-* **LiveData**
-* **ViewModel**
-* **ListAdapter**
+这里还有一个基于`MVVM`的[Demo](https://github.com/12313kaihuang/ArchitectureComponentsTest/tree/master/RoomTest)中也使用到了ListAdapter。
 
 ## 前言
 最近了解到一个很NB的东西：**ListAdapter**，结合`LiveData`可以很轻松的实现`RecyclerView`列表的页面更新操作，由此特地写了一个Demo来实操一下。
