@@ -23,6 +23,8 @@ import java.util.List;
 /**
  * @author hy
  * @Date 2019/10/22 0022
+ * <p>
+ * 模拟一下下载应用的场景，会实时显示进度
  **/
 public class DownLoadTestActivity extends AppCompatActivity {
 

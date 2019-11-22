@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yu.hu.hideiconapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 为了与上一种情况区分 象征性的申请一个权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,17 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:exported="true"
+            android:name=".MainActivity">
+<!--            <intent-filter>-->
+<!--&lt;!&ndash;                <action android:name="android.intent.action.MAIN" />&ndash;&gt;-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
+<!--&lt;!&ndash;                <category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;-->
+<!--&lt;!&ndash;                <category android:name="android.intent.category.DEFAULT" />&ndash;&gt;-->
 
-                <!--通过隐式intent启动 通过这里隐藏icon   -->
-                <!-- host默认不允许有大写字母，添加ignore则可以使用了 -->
-                <data android:host="AuthActivity" android:scheme="com.yu.hu.hideiconapp"
-                    tools:ignore="AppLinkUrlError" />
-            </intent-filter>
+<!--                &lt;!&ndash;通过隐式intent启动 通过这里隐藏icon   &ndash;&gt;-->
+<!--                &lt;!&ndash; host默认不允许有大写字母，添加ignore则可以使用了 &ndash;&gt;-->
+<!--                <data android:host="AuthActivity" android:scheme="com.yu.hu.hideiconapp"-->
+<!--                    tools:ignore="AppLinkUrlError" />-->
+<!--            </intent-filter>-->
 
 <!--            <intent-filter>-->
 <!--                &lt;!&ndash;通过隐式intent启动 通过这里隐藏icon   &ndash;&gt;-->
@@ -31,5 +35,8 @@
 <!--                    tools:ignore="AppLinkUrlError" />-->
 <!--            </intent-filter>-->
         </activity>
+
+<!--        <service android:name=".TestService"/>-->
+<!--        <receiver android:name=".TestBroadcastReceiver"/>-->
     </application>
 </manifest>
