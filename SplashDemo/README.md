@@ -1,5 +1,9 @@
 # Android启动页实现（启动优化，刘海屏水滴屏全屏适配等）
 
+**最终效果图**：<br/>
+<img src="img/final.gif" alt="Sample"  width="300" height="480">
+
+## 前言
 最近想实现一个启动页，于是试了手机里的几个常用`App`，总结出以下需要**实现**的**要点**或**注意点**：
 1. **启动优化** <br/>
  一般情况下，**冷启动**时在`Application`初始化的过程中会出现**短暂的白屏或黑屏**，这里可以做一个优化，提高用户体验。
@@ -282,7 +286,6 @@ public class SplashActivity extends AppCompatActivity {
 ```
 
 ## 最后
-最终效果图：<br/>
 
 [Demo链接](https://github.com/12313kaihuang/Demos/edit/master/SplashDemo)<br/>
 
