@@ -3,6 +3,8 @@
 **最终效果图**：<br/>
 <img src="img/final.gif" alt="Sample"  width="300" height="480">
 
+直接下载[apk](apk/SplashDemo.apk)
+
 ## 前言
 最近想实现一个启动页，于是试了手机里的几个常用`App`，总结出以下需要**实现**的**要点**或**注意点**：
 1. **启动优化** <br/>
@@ -199,14 +201,15 @@ ok，可以看到，设置了背景之后感觉好多了，只不过这里为了
 很遗憾，设备资源有限，手上的真机只有一部**红米3S**和**小米CC9e**（水滴屏 Android Q），完美的避开了这种情况。 = =<br/>
 不过我有在某个博客中（原谅我找不到了原博客链接了）看到了解决方案（**未验证**），需要的小伙伴的可以顺便验证一下：
 ```xml
-<application
-    android:allowBackup="true"
-    android:icon="@drawable/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme"
-    tools:ignore="GoogleAppIndexingWarning">
+<activity
+    android:name=".splash.SplashActivity"
+    android:screenOrientation="portrait"
+    android:theme="@style/AppTheme.Splash">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
 
     <!--允许绘制到oppo、vivo刘海屏机型的刘海区域 -->
     <meta-data
@@ -222,9 +225,7 @@ ok，可以看到，设置了背景之后感觉好多了，只不过这里为了
     <meta-data
         android:name="notch.config"
         android:value="portrait" />
-    
-    ...
-</application>
+</activity>
 ```
 ### 全屏适配
 **你以为这样就真的OK了吗**？ **too young too simple !**，先来**上面的方案执行后的效果**(XiaoMi CC9e)：<br/>

@@ -13,9 +13,19 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            //混淆
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                //在这里修改apk文件名
+                //outputFileName = "${variant.name}-v${variant.versionName}.apk"
+                outputFileName = "SplashDemo.apk"
+            }
     }
 
     dataBinding{
