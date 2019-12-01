@@ -9,7 +9,7 @@
  通常启动页都会有一个开屏页广告，**需要占据通知栏**的，一般情况下只需要设置一个全屏主题即可解决，但是当碰到异形屏（如 水滴屏，刘海屏等）时就需要做一些**额外的适配**工作。
 4. 虚拟的**导航栏遮盖**问题<br/>
 如果存在**虚拟`NavigationBar`**，那么还需要做一个**适配**，否则**默认情况下**，**启动页的底部**如果有文字或图片的话**会被虚拟的导航栏遮盖住**。
-5. 屏蔽Back键 <br/>
+5. **屏蔽Back键** <br/>
 即展示启动页时`back`无效，但是可以按`home`键返回桌面。
 
 <br/>
@@ -68,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
 3. `layout`文件就不上了，通过效果图就能看出来，就只是放了一张图片。
 
 效果图（`Pixel`）：<br/>
-<img src="/img/launch_base.gif" alt="Sample"  width="300" height="480">
+<img src="img/launch_base.gif" alt="Sample"  width="300" height="480">
 
 可以看到有**很明显的白屏**。
 
@@ -142,7 +142,7 @@ public class SplashActivity extends AppCompatActivity {
 </layout>
 ```
 效果图（RedMi 3S）:<br/>
-<img src="/img/launch2.mp4" alt="Sample"  width="300" height="480">
+<img src="img/launch2.gif" alt="Sample"  width="300" height="480">
 
 ok，可以看到，设置了背景之后感觉好多了，只不过这里为了更好的辨别添加了一个大红色的`TextView`可能看起来还是比较突兀。 = = <br/>
 
@@ -166,7 +166,7 @@ ok，可以看到，设置了背景之后感觉好多了，只不过这里为了
 
 ## 异形屏全屏适配
 首先我们先来看看当前所实现的代码在**水滴屏上的效果**（XiaoMi CC9e）：<br/>
-<img src="/img/launch3.mp4" alt="Sample"  width="300" height="480">
+<img src="img/launch3.gif" alt="Sample"  width="300" height="480">
 <br/>
 可以看到，屏幕上方有一个小黑条，所以对于异型屏，我们需要进行**额外的适配**，这些**适配可以分为两种**：
 * **Android P**(9.0)及以上的手机，**`Google`官方给我们提供了[解决方案](https://developer.android.com/guide/topics/display-cutout?hl=zh-CN)**。
@@ -224,7 +224,7 @@ ok，可以看到，设置了背景之后感觉好多了，只不过这里为了
 ```
 ### 全屏适配
 **你以为这样就真的OK了吗**？ **too young too simple !**，先来**上面的方案执行后的效果**(XiaoMi CC9e)：<br/>
-<img src="/img/launch4.mp4" alt="Sample"  width="300" height="480"><br/>
+<img src="img/launch4.gif" alt="Sample"  width="300" height="480"><br/>
 之前的**小黑条**变成**白条**了,说明我们前面做的适配是生效了的，但是我们的`TextView`并没有**延伸要屏幕顶部**，下面是解决方案：<br/>
 在全屏主题中添加以下两个属性即可，注意这两条属性是**API 21**出来的，所以需要**新建`values-v21/styles.xml`**，别忘了之前添加的`values-v28/styles.xml`中也要加上：
 ```xml
@@ -246,11 +246,11 @@ ok，可以看到，设置了背景之后感觉好多了，只不过这里为了
 </resources>
 ```
 效果图（XiaoMi CC9e）：<br/>
-<img src="/img/launch5.mp4" alt="Sample"  width="300" height="480">
+<img src="img/launch5.gif" alt="Sample"  width="300" height="480">
 
 ## 被虚拟`NavigationBar`遮挡问题
 先来看一下当前代码在`Pixel`上的运行情况:<br/>
-<img src="/img/launch6.png" alt="Sample"  width="300" height="480">
+<img src="img/launch6.png" alt="Sample"  width="300" height="480">
 <br/>
 可以看到我们的`logo`被虚拟的导航栏遮盖住了，这时候需要在**全屏主题中添加以下属性**:
 ```xml
@@ -265,7 +265,7 @@ ok，可以看到，设置了背景之后感觉好多了，只不过这里为了
 ```
 同样的，需要在 **`values-v21`** 和 **`values-v28`** 下的`styles.xml`中**都加上**。<br/>
 效果图（pixel):<br/>
-<img src="/img/launch7.png" alt="Sample"  width="300" height="480">
+<img src="img/launch7.png" alt="Sample"  width="300" height="480">
 <br/>
 ## 屏蔽Back键
 重写`SplashActivity`的 **`onBackPressed`** 方法什么都不做即可：
@@ -284,9 +284,10 @@ public class SplashActivity extends AppCompatActivity {
 ## 最后
 最终效果图：<br/>
 
-[Demo链接]()<br/>
+[Demo链接](https://github.com/12313kaihuang/Demos/edit/master/SplashDemo)<br/>
 
-原来一个启动页就有这么多的东西在里面。。Demo中肯定还有没有适配到的地方，如果发现文中哪里有错或不足欢迎指正~。
+原来一个启动页就有这么多的东西在里面。。<br/>
+Demo中肯定还有没有适配到的地方，如果发现文中哪里有错或不足欢迎指正~。
 
 ## 参考文章
 * [Splash适配解决启动图拉伸的问题](https://blog.csdn.net/aa464971/article/details/86692198)
