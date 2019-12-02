@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -22,6 +23,7 @@
             android:layout_marginBottom="150dp"
             android:contentDescription="@string/img"
             android:scaleType="centerCrop"
+            app:url="@{viewModel.splashModel.url}"
             tools:background="#F00" />
 
         <TextView
@@ -33,7 +35,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/bg_skip"
-            android:text="@{viewModel.translate2String(viewModel.getRestTime())}"
+            android:text="@{viewModel.translate2String(viewModel.restTime)}"
             android:textColor="#FFF"
             tools:text="跳过 2 s" />
     </FrameLayout>

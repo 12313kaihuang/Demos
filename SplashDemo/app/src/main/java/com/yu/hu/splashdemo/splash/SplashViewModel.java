@@ -33,15 +33,22 @@ public class SplashViewModel extends AndroidViewModel {
     private Context mContext;
 
     private MutableLiveData<Long> mRestTime;
+    private SplashModel splashModel;
 
     public SplashViewModel(@NonNull Application application) {
         super(application);
         mContext = application.getApplicationContext();
         mRestTime = new MutableLiveData<>(SPLASH_TIME_SECOND + 1);
+        splashModel = new SplashModel();
     }
 
     public MutableLiveData<Long> getRestTime() {
         return mRestTime;
+    }
+
+    //可以直接在view中调用 viewModel.imgUrl
+    public SplashModel getSplashModel() {
+        return splashModel;
     }
 
     public String translate2String(Long restTime) {
@@ -52,7 +59,9 @@ public class SplashViewModel extends AndroidViewModel {
     /**
      * 开始倒计时
      */
+    @SuppressWarnings("WeakerAccess")
     public void startInterval() {
+        splashModel.setUrl("https://www.bing.com/th?id=OHR.MarrakechMarket_ZH-CN5880133555_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp");
         subscribe = Observable.interval(1, TimeUnit.SECONDS)
                 .take(SPLASH_TIME_SECOND + 1)
                 .observeOn(AndroidSchedulers.mainThread())

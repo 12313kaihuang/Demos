@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.bumptech.glide.Glide;
 import com.yu.hu.splashdemo.MainActivity;
 import com.yu.hu.splashdemo.R;
 import com.yu.hu.splashdemo.databinding.ActivitySplashBinding;
@@ -36,11 +35,6 @@ public class SplashActivity extends AppCompatActivity {
         mDataBinding.setLifecycleOwner(this);
         mViewModel = new ViewModelProvider(this).get(SplashViewModel.class);
         mDataBinding.setViewModel(mViewModel);
-
-        //bing每日一图：https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1
-        Glide.with(this)
-                .load("https://www.bing.com/th?id=OHR.MarrakechMarket_ZH-CN5880133555_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp")
-                .into(mDataBinding.ivBg);
 
         mDataBinding.tvSkip.setOnClickListener(v -> {
             //移除监听 否则剩余1s时点击跳过会出现两次跳转至MainActivity情况
