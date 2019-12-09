@@ -68,9 +68,11 @@
 
 
 ## 自定义progressBar
-PorterDuff
 
-## 自定义
+见[UpdateProgressBar](app\src\main\java\com\yu\hu\customprogressbartest\progress\UpdateProgressBar.java)
+
+* [PorterDuff](https://www.jianshu.com/p/474037fd1593)
+
 
 ## 参考文章
 * [一个简单又不简单的进度条](https://www.jianshu.com/p/474037fd1593)
