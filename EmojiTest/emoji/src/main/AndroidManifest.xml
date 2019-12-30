@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yu.hu.emoji">
+
+    <application>
+        <activity android:name=".test.EmojiTestActivity" />
+    </application>
+</manifest>
