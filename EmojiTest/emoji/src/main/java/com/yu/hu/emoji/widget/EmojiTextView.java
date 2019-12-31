@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.text.style.ImageSpan;
 import android.util.AttributeSet;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
@@ -34,9 +33,8 @@ public class EmojiTextView extends AppCompatTextView implements IEmojiable {
         super(context, attrs, defStyleAttr);
     }
 
-    @NonNull
     @Override
-    public String getCurrentText() {
+    public String getEmojiText() {
         CharSequence text = getText();
         return text == null ? "" : text.toString();
     }
@@ -45,6 +43,7 @@ public class EmojiTextView extends AppCompatTextView implements IEmojiable {
     public void setEmojiText(String str) {
         if (TextUtils.isEmpty(str)) {
             setText(str);
+            return;
         }
 
         Matcher m = EmojiManager.matcher(str);

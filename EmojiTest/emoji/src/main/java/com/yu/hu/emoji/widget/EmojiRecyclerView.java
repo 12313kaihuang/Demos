@@ -3,17 +3,15 @@ package com.yu.hu.emoji.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yu.hu.emoji.adapter.EmojiAdapter;
 import com.yu.hu.emoji.entity.Emoji;
-import com.yu.hu.emoji.util.TransformUtils;
+import com.yu.hu.emoji.utils.EmojiDecoration;
 
 import java.util.List;
 
@@ -22,70 +20,81 @@ import java.util.List;
  * 用于显示表情列表
  *
  * @see #setEmojis(List)
+ * @see #setEmojis(List, int)
+ * @see #setEmojis(List, int, int)
  **/
 public class EmojiRecyclerView extends RecyclerView {
 
+    private static final int DEFAULT_SPAN_COUNT = 7;  //默认一行显示7个表情
+    private static final int DEFAULT_BOTTOM_OFFSET = 8; //默认底部间隔8dp
+
+    private EmojiAdapter mEmojiAdapter;
+
     public EmojiRecyclerView(@NonNull Context context) {
-        super(context);
+        this(context, null);
     }
 
     public EmojiRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public EmojiRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init(context);
     }
 
+    @SuppressWarnings("unused")
+    private void init(Context context) {
+        mEmojiAdapter = new EmojiAdapter();
+    }
+
+    /**
+     * 设置表情
+     *
+     * @param emojiList emojiList
+     */
     public void setEmojis(List<Emoji> emojiList) {
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
+        setEmojis(emojiList, DEFAULT_SPAN_COUNT);
+    }
+
+    /**
+     * 设置表情
+     *
+     * @param emojiList emojiList
+     * @param spanCount 每行表情数
+     */
+    public void setEmojis(List<Emoji> emojiList, int spanCount) {
+        setEmojis(emojiList, spanCount, DEFAULT_BOTTOM_OFFSET);
+    }
+
+    /**
+     * 设置表情
+     *
+     * @param emojiList    emojiList
+     * @param spanCount    每行表情数
+     * @param bottomOffect 每行表情底部间隔
+     */
+    public void setEmojis(List<Emoji> emojiList, int spanCount, int bottomOffect) {
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
         setLayoutManager(layoutManager);
         setNestedScrollingEnabled(false); //禁用滑动
-        EmojiAdapter emojiAdapter = new EmojiAdapter();
-        setAdapter(emojiAdapter);
-        emojiAdapter.submitList(emojiList);
+        setAdapter(mEmojiAdapter);
+        addItemDecoration(new EmojiDecoration(bottomOffect));
+        mEmojiAdapter.submitList(emojiList);
     }
 
-    private static class EmojiAdapter extends ListAdapter<Emoji, ViewHolder> {
-
-        EmojiAdapter() {
-            super(new DiffUtil.ItemCallback<Emoji>() {
-                @Override
-                public boolean areItemsTheSame(@NonNull Emoji oldItem, @NonNull Emoji newItem) {
-                    return oldItem.id == newItem.id;
-                }
-
-                @Override
-                public boolean areContentsTheSame(@NonNull Emoji oldItem, @NonNull Emoji newItem) {
-                    return oldItem.emojiRes == newItem.emojiRes;
-                }
-            });
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            EmojiView imageView = new EmojiView(parent.getContext());
-            LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.bottomMargin = TransformUtils.dip2px(parent.getContext(), 8);
-            imageView.setLayoutParams(layoutParams);
-            return new ViewHolder(imageView);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Emoji emoji = getItem(position);
-            ((EmojiView) holder.itemView).setImageResource(emoji.emojiRes);
-        }
-
+    /**
+     * 添加item点击事件
+     */
+    public void setOnItemClickListner(EmojiAdapter.OnItemClickListener itemClickListner) {
+        mEmojiAdapter.setOnItemClickListner(itemClickListner);
     }
 
-    private static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
-
 
 }

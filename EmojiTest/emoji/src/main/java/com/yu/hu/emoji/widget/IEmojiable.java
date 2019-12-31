@@ -10,13 +10,13 @@ import androidx.annotation.NonNull;
 public interface IEmojiable {
 
     /**
-     * 获取当前文本内容
-     */
-    @NonNull
-    String getCurrentText();
-
-    /**
      * 设置带有表情的文本
      */
+    @NonNull
     void setEmojiText(String str);
+
+    /**
+     * getter  用于数据双向绑定
+     */
+    String getEmojiText();
 }

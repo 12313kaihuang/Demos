@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.yu.hu.emoji.test.EmojiTestActivity;
+import com.yu.hu.emoji.ui.EmojiTestActivity;
 import com.yu.hu.emojitest.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.yu.hu.emoji.util;
+package com.yu.hu.emoji.utils;
 
 import android.content.Context;
 

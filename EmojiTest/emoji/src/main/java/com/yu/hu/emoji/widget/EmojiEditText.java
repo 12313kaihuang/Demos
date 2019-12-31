@@ -33,12 +33,12 @@ public class EmojiEditText extends AppCompatEditText implements IEmojiable {
 
     public void addEmoji(@DrawableRes int emojiRes) {
         String emojiText = EmojiManager.getEmojiText(emojiRes);
-        setEmojiText(getCurrentText() + emojiText);
+        setEmojiText(getEmojiText() + emojiText);
     }
 
     @NonNull
     @Override
-    public String getCurrentText() {
+    public String getEmojiText() {
         Editable text = getText();
         return text == null ? "" : text.toString();
     }

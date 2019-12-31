@@ -2,6 +2,6 @@
     package="com.yu.hu.emoji">
 
     <application>
-        <activity android:name=".test.EmojiTestActivity" />
+        <activity android:name=".ui.EmojiTestActivity" />
     </application>
 </manifest>

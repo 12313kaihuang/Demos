@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.yu.hu.emoji.ui.vm.TestViewModel" />
     </data>
 
     <ScrollView
@@ -21,6 +24,7 @@
                 android:id="@+id/emoji_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:emojiText="@{viewModel.emojiText}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -30,6 +34,7 @@
                 android:id="@+id/set_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.setEmojiText()}"
                 android:text="set" />
 
             <Button
@@ -81,12 +86,6 @@
                     android:src="@drawable/q_cool" />
 
             </LinearLayout>
-
-            <com.yu.hu.emoji.widget.EmojiGridLayout
-                android:id="@+id/grid_layout"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
 
             <com.yu.hu.emoji.widget.EmojiRecyclerView
                 android:id="@+id/recycler"
