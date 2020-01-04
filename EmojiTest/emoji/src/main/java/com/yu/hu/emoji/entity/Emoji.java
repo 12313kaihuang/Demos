@@ -59,4 +59,17 @@ public class Emoji {
     public String getDesc() {
         return desc;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Emoji{" +
+                "id=" + id +
+                ", emojiText='" + emojiText + '\'' +
+                ", emojiRes=" + emojiRes +
+                ", type=" + type +
+                ", desc='" + desc + '\'' +
+                ", recent=" + recent +
+                '}';
+    }
 }

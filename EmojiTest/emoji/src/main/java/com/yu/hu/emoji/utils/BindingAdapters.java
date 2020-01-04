@@ -17,6 +17,8 @@ public class BindingAdapters {
     public static void setEmojiText(View view, String text) {
         if (view instanceof IEmojiable) {
             ((IEmojiable) view).setEmojiText(text);
+        }else {
+            throw new RuntimeException(view.getClass().getName() + " has not implements IEmojiable");
         }
     }
 

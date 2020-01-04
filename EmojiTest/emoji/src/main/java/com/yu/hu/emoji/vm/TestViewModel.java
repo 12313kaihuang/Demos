@@ -1,7 +1,6 @@
-package com.yu.hu.emoji.ui.vm;
+package com.yu.hu.emoji.vm;
 
 import android.app.Application;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;

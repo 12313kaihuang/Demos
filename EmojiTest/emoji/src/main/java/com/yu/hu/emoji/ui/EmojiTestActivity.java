@@ -11,10 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.yu.hu.emoji.EmojiManager;
 import com.yu.hu.emoji.R;
-import com.yu.hu.emoji.adapter.EmojiAdapter;
 import com.yu.hu.emoji.databinding.ActivityEmojiTestBinding;
 import com.yu.hu.emoji.entity.Emoji;
-import com.yu.hu.emoji.ui.vm.TestViewModel;
+import com.yu.hu.emoji.vm.TestViewModel;
 
 import java.util.List;
 
@@ -34,8 +33,12 @@ public class EmojiTestActivity extends AppCompatActivity {
             Toast.makeText(EmojiTestActivity.this, text, Toast.LENGTH_SHORT).show();
         });
 
+        viewDataBinding.getEmojiBtn.setOnClickListener(v -> {
+            CharSequence text = viewDataBinding.emojiEditText.getText();
+            Toast.makeText(EmojiTestActivity.this, text, Toast.LENGTH_SHORT).show();
+        });
+
         List<Emoji> allQQEmoji = EmojiManager.getAllQQEmoji();
-        Log.d("hytest", "onCreate: size = " + allQQEmoji.size() + "," + allQQEmoji.get(0).emojiText);
         //viewDataBinding.gridLayout.addEmojis(allQQEmoji);
 
         viewDataBinding.recycler.setEmojis(allQQEmoji);
@@ -43,6 +46,7 @@ public class EmojiTestActivity extends AppCompatActivity {
             MutableLiveData<String> emojiText = viewModel.getEmojiText();
             String value = emojiText.getValue();
             viewModel.getEmojiText().postValue(value + emoji.emojiText);
+            viewDataBinding.emojiEditText.addEmoji(emoji);
         });
     }
 }
