@@ -115,6 +115,19 @@ public class EmojiManager {
         emojiList.add(new Emoji("[q_xu\\tr]", R.drawable.q_xu, "嘘", Emoji.TYPE_QQ));
         emojiList.add(new Emoji("[q_yun\\tr]", R.drawable.q_yun, "晕", Emoji.TYPE_QQ));
         emojiList.add(new Emoji("[q_zk2\\tr]", R.drawable.q_zk2, "抓狂2", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_dm\\tr]", R.drawable.q_dm, "倒霉", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_klt\\tr]", R.drawable.q_klt, "骷髅头", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_qt\\tr]", R.drawable.q_qt, "敲头", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_zj\\tr]", R.drawable.q_zj, "再见", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_ch\\tr]", R.drawable.q_ch, "擦汗", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_kb\\tr]", R.drawable.q_kb, "抠鼻", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_gz\\tr]", R.drawable.q_gz, "鼓掌", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_j\\tr]", R.drawable.q_j, "囧", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_huaix\\tr]", R.drawable.q_huaix, "坏笑", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_zhh\\tr]", R.drawable.q_zhh, "左哼哼", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_yhh\\tr]", R.drawable.q_yhh, "右哼哼", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_hq\\tr]", R.drawable.q_hq, "哈欠", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_bs\\tr]", R.drawable.q_bs, "鄙视", Emoji.TYPE_QQ));
 
         //emoji
 
