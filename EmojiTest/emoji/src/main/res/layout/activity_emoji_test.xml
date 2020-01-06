@@ -92,7 +92,7 @@
 
             </LinearLayout>
 
-            <com.yu.hu.emoji.widget.EmojiRecyclerView
+            <com.yu.hu.emoji.widget.EmojiListView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

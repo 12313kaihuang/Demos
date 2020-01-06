@@ -11,7 +11,6 @@ import java.util.Date;
  * 日期转换器
  * room无法直接存储{@link java.util.Date}类型数据，所以需要进行一个转换
  **/
-@SuppressWarnings("unused")
 public class DateConverter {
 
     @TypeConverter

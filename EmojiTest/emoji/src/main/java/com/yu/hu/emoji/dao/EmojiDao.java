@@ -23,6 +23,9 @@ public interface EmojiDao {
     @Query("SELECT * FROM TB_EMOJI WHERE type = :type ORDER BY id")
     List<Emoji> queryAllByType(int type);
 
+    @Query("SELECT * FROM TB_EMOJI WHERE recent_time != 0 ORDER BY recent_time DESC LIMIT :num")
+    List<Emoji> queryRecent(int num);
+
     @Query("SELECT * FROM TB_EMOJI WHERE emoji_text = :emojiText LIMIT 1")
     Emoji getEmojiByText(String emojiText);
 

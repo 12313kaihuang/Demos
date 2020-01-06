@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="emojiData"
+            type="com.yu.hu.emoji.widget.EmojiListView.EmojiData" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/emojiTextPaddingLeft"
+            android:paddingLeft="@dimen/emojiTextPaddingLeft"
+            android:paddingBottom="@dimen/emojiTextPaddingBottom"
+            android:text="@string/recent_use"
+            android:textColor="@color/emojiTextColor"
+            android:textSize="@dimen/emojiTextSize"
+            android:visibility="@{emojiData.recentEmojis.empty?View.GONE:View.VISIBLE}"
+            tools:ignore="RtlSymmetry" />
+
+        <com.yu.hu.emoji.widget.EmojiRecyclerView
+            android:id="@+id/recent_emoji_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{emojiData.recentEmojis.empty?View.GONE:View.VISIBLE}"
+            app:emojis="@{emojiData.recentEmojis}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/emojiTextPaddingLeft"
+            android:paddingLeft="@dimen/emojiTextPaddingLeft"
+            android:paddingBottom="@dimen/emojiTextPaddingBottom"
+            android:text="@string/qq_emoji"
+            android:textColor="@color/emojiTextColor"
+            android:textSize="@dimen/emojiTextSize"
+            tools:ignore="RtlSymmetry" />
+
+        <com.yu.hu.emoji.widget.EmojiRecyclerView
+            android:id="@+id/qq_emoji_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:emojis="@{emojiData.qqEmojis}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/emojiTextPaddingLeft"
+            android:paddingLeft="@dimen/emojiTextPaddingLeft"
+            android:paddingBottom="@dimen/emojiTextPaddingBottom"
+            android:text="@string/default_emoji"
+            android:textColor="@color/emojiTextColor"
+            android:textSize="@dimen/emojiTextSize"
+            tools:ignore="RtlSymmetry" />
+
+        <com.yu.hu.emoji.widget.EmojiRecyclerView
+            android:id="@+id/default_emoji_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:emojis="@{emojiData.defaultEmojis}" />
+
+    </LinearLayout>
+</layout>

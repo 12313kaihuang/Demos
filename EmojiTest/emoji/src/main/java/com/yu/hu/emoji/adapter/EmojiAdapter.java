@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
+import com.yu.hu.emoji.EmojiManager;
 import com.yu.hu.emoji.entity.Emoji;
 import com.yu.hu.emoji.widget.EmojiRecyclerView;
 import com.yu.hu.emoji.widget.EmojiView;
@@ -15,9 +16,12 @@ import com.yu.hu.emoji.widget.EmojiView;
  *
  * @see #setOnItemClickListner(OnItemClickListener)  item点击事件
  **/
+@SuppressWarnings("unused")
 public class EmojiAdapter extends ListAdapter<Emoji, EmojiRecyclerView.ViewHolder> {
 
     private OnItemClickListener itemClickListner;
+
+    private boolean autoRecent = true;  //点击时自动记录时间
 
     public EmojiAdapter() {
         super(new DiffUtil.ItemCallback<Emoji>() {
@@ -32,6 +36,15 @@ public class EmojiAdapter extends ListAdapter<Emoji, EmojiRecyclerView.ViewHolde
                         && oldItem.emojiRes == newItem.emojiRes;
             }
         });
+    }
+
+    /**
+     * 点击时自动记录时间
+     *
+     * @param autoRecent <code>true</code>则自动记录时间
+     */
+    public void setAutoRecent(boolean autoRecent) {
+        this.autoRecent = autoRecent;
     }
 
     /**
@@ -52,6 +65,9 @@ public class EmojiAdapter extends ListAdapter<Emoji, EmojiRecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull EmojiRecyclerView.ViewHolder holder, int position) {
         final Emoji emoji = getItem(position);
         holder.itemView.setOnClickListener(v -> {
+            if (autoRecent) {
+                EmojiManager.recentClick(emoji);
+            }
             if (itemClickListner != null) {
                 itemClickListner.onItemClick(emoji);
             }

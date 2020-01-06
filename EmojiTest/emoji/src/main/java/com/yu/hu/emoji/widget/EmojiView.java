@@ -21,6 +21,10 @@ public class EmojiView extends AppCompatImageView {
         super(context);
     }
 
+    /**
+     * 设置表情大小
+     * @param size 大小 dp
+     */
     @SuppressWarnings("unused")
     public EmojiView setSize(int size) {
         this.size = size;

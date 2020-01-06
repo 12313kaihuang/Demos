@@ -1,7 +1,6 @@
 package com.yu.hu.emoji.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +40,7 @@ public class EmojiTestActivity extends AppCompatActivity {
         List<Emoji> allQQEmoji = EmojiManager.getAllQQEmoji();
         //viewDataBinding.gridLayout.addEmojis(allQQEmoji);
 
-        viewDataBinding.recycler.setEmojis(allQQEmoji);
+        //viewDataBinding.recycler.setEmojis(allQQEmoji);
         viewDataBinding.recycler.setOnItemClickListner(emoji -> {
             MutableLiveData<String> emojiText = viewModel.getEmojiText();
             String value = emojiText.getValue();

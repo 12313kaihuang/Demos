@@ -23,9 +23,10 @@ import java.util.List;
  * @see #setEmojis(List, int)
  * @see #setEmojis(List, int, int)
  **/
+@SuppressWarnings("unused")
 public class EmojiRecyclerView extends RecyclerView {
 
-    private static final int DEFAULT_SPAN_COUNT = 7;  //默认一行显示7个表情
+    public static final int DEFAULT_SPAN_COUNT = 7;  //默认一行显示7个表情
     private static final int DEFAULT_BOTTOM_OFFSET = 8; //默认底部间隔8dp
 
     private EmojiAdapter mEmojiAdapter;
@@ -46,6 +47,15 @@ public class EmojiRecyclerView extends RecyclerView {
     @SuppressWarnings("unused")
     private void init(Context context) {
         mEmojiAdapter = new EmojiAdapter();
+    }
+
+    /**
+     * 点击时自动记录时间
+     *
+     * @param autoRecent <code>true</code>则自动记录时间
+     */
+    public void setAutoRecent(boolean autoRecent) {
+        this.mEmojiAdapter.setAutoRecent(autoRecent);
     }
 
     /**

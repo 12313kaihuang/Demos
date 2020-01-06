@@ -60,6 +60,13 @@ public class Emoji {
         return desc;
     }
 
+    /**
+     * 更新最近点击时间
+     */
+    public void recent(){
+        this.recent = new Date();
+    }
+
     @NonNull
     @Override
     public String toString() {

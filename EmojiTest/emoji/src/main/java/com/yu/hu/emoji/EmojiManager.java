@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.yu.hu.emoji.entity.Emoji;
 import com.yu.hu.emoji.repository.EmojiRepository;
+import com.yu.hu.emoji.widget.EmojiRecyclerView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class EmojiManager {
 
     //匹配表情[**\tr]
     private static final String EMOJI_REGEX = "\\[[qe]_[a-z0-9]+\\\\tr]";
+
+    private static final int DEFAULT_RECENT_EMOJI_NUM = EmojiRecyclerView.DEFAULT_SPAN_COUNT * 3;
 
     /**
      * 用于正则匹配
@@ -79,57 +82,78 @@ public class EmojiManager {
         List<Emoji> emojiList = new ArrayList<>();
 
         //qq表情
-        emojiList.add(new Emoji("[q_wx\\tr]", R.drawable.q_wx, "微笑", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_qx\\tr]", R.drawable.q_kx, "苦笑", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_hc\\tr]", R.drawable.q_hc, "花痴", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_dz\\tr]", R.drawable.q_dz, "呆滞", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_cool\\tr]", R.drawable.q_cool, "酷", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_dk\\tr]", R.drawable.q_dk, "大哭", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_hx\\tr]", R.drawable.q_hx, "害羞", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_bz\\tr]", R.drawable.q_bz, "闭嘴", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_dks\\tr]", R.drawable.q_dks, "打瞌睡", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_wq\\tr]", R.drawable.q_wq, "委屈", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_gg\\tr]", R.drawable.q_gg, "尴尬", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_fn\\tr]", R.drawable.q_fn, "愤怒", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_tp\\tr]", R.drawable.q_tp, "调皮", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_zy\\tr]", R.drawable.q_zy, "龇牙", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_jy\\tr]", R.drawable.q_jy, "惊讶", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_bkx\\tr]", R.drawable.q_bkx, "不开心", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_cool2\\tr]", R.drawable.q_cool2, "酷2", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_lh\\tr]", R.drawable.q_lh, "冷汗", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_zk\\tr]", R.drawable.q_zk, "抓狂", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_ot\\tr]", R.drawable.q_ot, "呕吐", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_tx\\tr]", R.drawable.q_tx, "偷笑", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_ka\\tr]", R.drawable.q_ka, "可爱", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_ws\\tr]", R.drawable.q_ws, "无视", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_am\\tr]", R.drawable.q_am, "傲慢", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_tz\\tr]", R.drawable.q_tz, "舔嘴", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_fk\\tr]", R.drawable.q_fk, "犯困", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_jk\\tr]", R.drawable.q_jk, "惊恐", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_liuh\\tr]", R.drawable.q_liuh, "流汗", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_dx\\tr]", R.drawable.q_dx, "大笑", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_jm\\tr]", R.drawable.q_jm, "军帽", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_nl\\tr]", R.drawable.q_nl, "努力", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_cj\\tr]", R.drawable.q_cj, "吵架", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_yw\\tr]", R.drawable.q_yw, "疑问", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_xu\\tr]", R.drawable.q_xu, "嘘", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_yun\\tr]", R.drawable.q_yun, "晕", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_zk2\\tr]", R.drawable.q_zk2, "抓狂2", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_dm\\tr]", R.drawable.q_dm, "倒霉", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_klt\\tr]", R.drawable.q_klt, "骷髅头", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_qt\\tr]", R.drawable.q_qt, "敲头", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_zj\\tr]", R.drawable.q_zj, "再见", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_ch\\tr]", R.drawable.q_ch, "擦汗", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_kb\\tr]", R.drawable.q_kb, "抠鼻", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_gz\\tr]", R.drawable.q_gz, "鼓掌", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_j\\tr]", R.drawable.q_j, "囧", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_huaix\\tr]", R.drawable.q_huaix, "坏笑", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_zhh\\tr]", R.drawable.q_zhh, "左哼哼", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_yhh\\tr]", R.drawable.q_yhh, "右哼哼", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_hq\\tr]", R.drawable.q_hq, "哈欠", Emoji.TYPE_QQ));
-        emojiList.add(new Emoji("[q_bs\\tr]", R.drawable.q_bs, "鄙视", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_wx\\tr]", R.drawable.q_wx, "[微笑]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_qx\\tr]", R.drawable.q_kx, "[苦笑]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_hc\\tr]", R.drawable.q_hc, "[花痴]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_dz\\tr]", R.drawable.q_dz, "[呆滞]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_cool\\tr]", R.drawable.q_cool, "[耍酷]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_dk\\tr]", R.drawable.q_dk, "[大哭]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_hx\\tr]", R.drawable.q_hx, "[害羞]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_bz\\tr]", R.drawable.q_bz, "[闭嘴]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_dks\\tr]", R.drawable.q_dks, "[打瞌睡]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_wq\\tr]", R.drawable.q_wq, "[委屈]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_gg\\tr]", R.drawable.q_gg, "[尴尬]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_fn\\tr]", R.drawable.q_fn, "[愤怒]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_tp\\tr]", R.drawable.q_tp, "[调皮]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_zy\\tr]", R.drawable.q_zy, "[龇牙]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_jy\\tr]", R.drawable.q_jy, "[惊讶]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_bkx\\tr]", R.drawable.q_bkx, "[不开心]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_cool2\\tr]", R.drawable.q_cool2, "[酷]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_lh\\tr]", R.drawable.q_lh, "[冷汗]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_zk\\tr]", R.drawable.q_zk, "[抓狂]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_ot\\tr]", R.drawable.q_ot, "[呕吐]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_tx\\tr]", R.drawable.q_tx, "[偷笑]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_ka\\tr]", R.drawable.q_ka, "[可爱]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_ws\\tr]", R.drawable.q_ws, "[无视]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_am\\tr]", R.drawable.q_am, "[傲慢]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_tz\\tr]", R.drawable.q_tz, "[馋]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_fk\\tr]", R.drawable.q_fk, "[犯困]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_jk\\tr]", R.drawable.q_jk, "[惊恐]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_liuh\\tr]", R.drawable.q_liuh, "[流汗]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_dx\\tr]", R.drawable.q_dx, "[大笑]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_jm\\tr]", R.drawable.q_jm, "[军帽]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_nl\\tr]", R.drawable.q_nl, "[努力]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_cj\\tr]", R.drawable.q_cj, "[吵架]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_yw\\tr]", R.drawable.q_yw, "[疑问]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_xu\\tr]", R.drawable.q_xu, "[嘘]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_yun\\tr]", R.drawable.q_yun, "[晕]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_zk2\\tr]", R.drawable.q_zk2, "[烦]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_dm\\tr]", R.drawable.q_dm, "[倒霉]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_klt\\tr]", R.drawable.q_klt, "[骷髅头]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_qt\\tr]", R.drawable.q_qt, "[敲头]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_zj\\tr]", R.drawable.q_zj, "[再见]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_ch\\tr]", R.drawable.q_ch, "[擦汗]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_kb\\tr]", R.drawable.q_kb, "[抠鼻]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_gz\\tr]", R.drawable.q_gz, "[鼓掌]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_j\\tr]", R.drawable.q_j, "[囧]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_huaix\\tr]", R.drawable.q_huaix, "[坏笑]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_zhh\\tr]", R.drawable.q_zhh, "[左哼哼]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_yhh\\tr]", R.drawable.q_yhh, "[右哼哼]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_hq\\tr]", R.drawable.q_hq, "[哈欠]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_bs\\tr]", R.drawable.q_bs, "[鄙视]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_wq2\\tr]", R.drawable.q_wq2, "[委屈]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_wq3\\tr]", R.drawable.q_wq3, "[委屈]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_hx2\\tr]", R.drawable.q_hx2, "[坏笑]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_qq\\tr]", R.drawable.q_qq, "[亲亲]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_jx\\tr]", R.drawable.q_jx, "[惊吓]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_kl\\tr]", R.drawable.q_kl, "[可怜]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_tp2\\tr]", R.drawable.q_tp2, "[调皮]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_xk\\tr]", R.drawable.q_xk, "[笑哭]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_bot\\tr]", R.drawable.q_bot, "[确定?]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_ku\\tr]", R.drawable.q_ku, "[哭]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_wn\\tr]", R.drawable.q_wn, "[无奈]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_ts\\tr]", R.drawable.q_ts, "[托腮]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_mm\\tr]", R.drawable.q_mm, "[卖萌]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_xyx\\tr]", R.drawable.q_xyx, "[斜眼笑]", Emoji.TYPE_QQ));
 
         //emoji
+        emojiList.add(new Emoji("[e_kx\\tr]", R.drawable.e_kx, "[开心]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_yy\\tr]", R.drawable.e_yy, "[愉悦]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_qin\\tr]", R.drawable.e_qin, "[亲亲]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_han\\tr]", R.drawable.e_han, "[汗]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_ns\\tr]", R.drawable.e_ns, "[难受]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_ts\\tr]", R.drawable.e_ts, "[吐舌头]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_hei\\tr]", R.drawable.e_hei, "[嘻嘻]", Emoji.TYPE_EMOJI));
 
         return emojiList;
     }
@@ -174,6 +198,34 @@ public class EmojiManager {
      */
     public static List<Emoji> getAllEmoji() {
         return sEmojiRepository.queryAllByType(Emoji.TYPE_EMOJI);
+    }
+
+    /**
+     * 获取最近使用的表情
+     */
+    @NonNull
+    public static List<Emoji> getRecentEmoji() {
+        return getRecentEmoji(DEFAULT_RECENT_EMOJI_NUM);
+    }
+
+    /**
+     * 获取最近使用的表情
+     *
+     * @param num 表情数
+     */
+    @NonNull
+    public static List<Emoji> getRecentEmoji(int num) {
+        return sEmojiRepository.getRecentEmoji(num);
+    }
+
+    /**
+     * 记录最近点击时间
+     *
+     * @param emoji emoji
+     */
+    public static void recentClick(Emoji emoji) {
+        emoji.recent();
+        sEmojiRepository.insertAll(emoji);
     }
 
     /**

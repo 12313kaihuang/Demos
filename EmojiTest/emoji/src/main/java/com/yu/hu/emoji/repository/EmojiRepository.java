@@ -3,6 +3,7 @@ package com.yu.hu.emoji.repository;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.yu.hu.emoji.dao.EmojiDao;
@@ -54,4 +55,15 @@ public class EmojiRepository {
         Emoji emoji = mEmojiDao.getEmojiByRes(emojiRes);
         return emoji != null ? emoji.emojiText : null;
     }
+
+    @NonNull
+    public List<Emoji> getRecentEmoji(int num) {
+        return mEmojiDao.queryRecent(num);
+    }
+
+    public void insertAll(Emoji... emojis) {
+        mEmojiDao.insertAll(emojis);
+    }
+
+
 }
