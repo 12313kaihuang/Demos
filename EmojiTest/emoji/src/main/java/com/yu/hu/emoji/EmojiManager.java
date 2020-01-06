@@ -145,6 +145,13 @@ public class EmojiManager {
         emojiList.add(new Emoji("[q_ts\\tr]", R.drawable.q_ts, "[托腮]", Emoji.TYPE_QQ));
         emojiList.add(new Emoji("[q_mm\\tr]", R.drawable.q_mm, "[卖萌]", Emoji.TYPE_QQ));
         emojiList.add(new Emoji("[q_xyx\\tr]", R.drawable.q_xyx, "[斜眼笑]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_px\\tr]", R.drawable.q_px, "[喷血]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_jxi\\tr]", R.drawable.q_jxi, "[惊喜]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_sr\\tr]", R.drawable.q_sr, "[骚扰]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_xjj\\tr]", R.drawable.q_xjj, "[小纠结]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_wzm\\tr]", R.drawable.q_wzm, "[我最美]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_cd\\tr]", R.drawable.q_cd, "[菜刀]", Emoji.TYPE_QQ));
+        emojiList.add(new Emoji("[q_xg\\tr]", R.drawable.q_xg, "[西瓜]", Emoji.TYPE_QQ));
 
         //emoji
         emojiList.add(new Emoji("[e_kx\\tr]", R.drawable.e_kx, "[开心]", Emoji.TYPE_EMOJI));
@@ -154,6 +161,13 @@ public class EmojiManager {
         emojiList.add(new Emoji("[e_ns\\tr]", R.drawable.e_ns, "[难受]", Emoji.TYPE_EMOJI));
         emojiList.add(new Emoji("[e_ts\\tr]", R.drawable.e_ts, "[吐舌头]", Emoji.TYPE_EMOJI));
         emojiList.add(new Emoji("[e_hei\\tr]", R.drawable.e_hei, "[嘻嘻]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_wp\\tr]", R.drawable.e_wp, "[顽皮]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_sf\\tr]", R.drawable.e_sf, "[舒服]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_nd\\tr]", R.drawable.e_nd, "[你懂]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_xh\\tr]", R.drawable.e_xh, "[喜欢]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_sad\\tr]", R.drawable.e_sad, "[伤心]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_lau\\tr]", R.drawable.e_lau, "[开心]", Emoji.TYPE_EMOJI));
+        emojiList.add(new Emoji("[e_xx\\tr]", R.drawable.e_xx, "[邪笑]", Emoji.TYPE_EMOJI));
 
         return emojiList;
     }
