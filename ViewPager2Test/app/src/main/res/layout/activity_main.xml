@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:tabGravity="center"
+        app:tabIndicatorColor="#ff678f"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="#ff678f"
+        app:tabTextColor="#333333"
+        app:tabUnboundedRipple="true" />
+
+    <!--
+        tabIndicatorColor  指示器颜色
+        tabIndicatorHeight 指示器高度
+        tabIndicatorFullWidth  设置为false 则指示器跟文本宽度一致
+        tabUnboundedRipple 设置为true点击时会有一个水波纹效果
+        tabGravity 可设置center或fill；center指的是居中显示，fill指的是沾满全屏。
+        tabMode 可设置fixed和 scrollable；fixed：指的是固定tab；scrollable指的是tab可滑动。
+        tabTextColor tab文字颜色
+        tabSelectedTextColor 选中时的tab颜色
+
+    -->
+
+    <!-- ViewPager2内部通过RecyclerView
+         所以需要通过orientation来设置页面切换方向-->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" />
+</LinearLayout>
