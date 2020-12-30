@@ -6,6 +6,9 @@
 * [通知Demo](/NotificationTest)
 * [RecyclerView之DiffUtil](/DiffUtilTest)
 * [隐式启动与隐藏图标](/HideIconTest)
-* [DialogFragment的简单使用](/DialogFragmentTest)](/HideIconTest)
+* [DialogFragment的简单使用](/DialogFragmentTest)
 * [自定义注解处理器](/AnnotationProcessorTest)
+
+## [KotlinDemos](/KotlinDemos)
+kotlin版的一些demo
 
