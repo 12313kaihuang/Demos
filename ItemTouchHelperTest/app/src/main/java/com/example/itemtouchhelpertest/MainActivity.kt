@@ -17,8 +17,14 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
     lateinit var mTouchHelper: ItemTouchHelper
     lateinit var mStudentAdapter: StudentAdapter
     private var studentList: MutableList<Student> = mutableListOf(
-            Student("Tom"), Student("Merry"),
-            Student("Bob"), Student("Lucy")
+        Student("Tom"), Student("Merry"),
+        Student("Bob"), Student("Lucy"),
+        Student("May"), Student("Kate"),
+        Student("另一个分组", Student.ITEM_TYPE_LABEL), Student("Andy", enable = false),
+        Student("Jerry", enable = false), Student("Anne", enable = false),
+        Student("Kelly", enable = false), Student("Ryan", enable = false),
+        Student("Leon", enable = false), Student("Alex", enable = false),
+        Student("Joyce", enable = false), Student("Eve", enable = false)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,11 +36,12 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
         mTouchHelper.attachToRecyclerView(mDataBinding.recyclerView)
         mDataBinding.recyclerView.layoutManager = LinearLayoutManager(this)
         mDataBinding.recyclerView.adapter = mStudentAdapter
+        Log.d(TAG, "onCreate: submitList $studentList")
         mStudentAdapter.submitList(studentList)
     }
 
-    override fun onDragIconClick(position: Int, holder: StudentAdapter.StudentViewHolder) {
-        Toast.makeText(this, "on drag $position", Toast.LENGTH_SHORT).show()
+    override fun onDragIconClick(item: Student, holder: StudentAdapter.StudentViewHolder) {
+        Toast.makeText(this, "on drag $item", Toast.LENGTH_SHORT).show()
         mTouchHelper.startDrag(holder)
     }
 
@@ -42,12 +49,17 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
      * UP or DOWN 监听向上及向下的滑动
      */
     private val mCallback: ItemTouchHelper.Callback = object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
+        ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
+    ) {
 
         /**
          * 如果当前ViewHolder可以放在目标ViewHolder上，则返回true。
          */
-        override fun canDropOver(recyclerView: RecyclerView, current: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+        override fun canDropOver(
+            recyclerView: RecyclerView,
+            current: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
             val from = current.adapterPosition
             val to = target.adapterPosition
             Log.d(TAG, "canDropOver: $from to $to")
@@ -55,7 +67,11 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
         }
 
         //view移动
-        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
             val from = viewHolder.adapterPosition
             val to = target.adapterPosition
             if (from < to) {
