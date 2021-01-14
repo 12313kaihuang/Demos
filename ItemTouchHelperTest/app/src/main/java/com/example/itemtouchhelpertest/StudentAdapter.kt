@@ -14,6 +14,12 @@ import com.example.itemtouchhelpertest.databinding.ItemStudentBinding
 class StudentAdapter(private val dragListener: OnDragIconClickListener?) :
     ListAdapter<Student, StudentAdapter.StudentViewHolder>(StudentDiffCallback()) {
 
+    private var iconClickListener:((item:Student) -> Unit)? = null
+
+    fun setOnIconCLickListener(listener: ((item:Student) -> Unit)?) {
+        iconClickListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder =
         StudentViewHolder(
             ItemStudentBinding.inflate(
@@ -31,6 +37,10 @@ class StudentAdapter(private val dragListener: OnDragIconClickListener?) :
         fun bind(data: Student) {
             Log.d("StudentViewHolder", "bind: $data")
             mDataBinding.student = data
+            mDataBinding.icon.setImageResource(data.icon)
+            mDataBinding.icon.setOnClickListener {
+                iconClickListener?.invoke(data)
+            }
             mDataBinding.dragIv.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN) {
                     dragListener?.onDragIconClick(data, this)

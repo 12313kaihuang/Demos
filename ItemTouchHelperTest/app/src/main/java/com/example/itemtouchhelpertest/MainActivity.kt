@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.itemtouchhelpertest.databinding.ActivityMainBinding
 import java.util.*
+import kotlin.Comparator
 
 class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener {
 
     lateinit var mDataBinding: ActivityMainBinding
     lateinit var mTouchHelper: ItemTouchHelper
     lateinit var mStudentAdapter: StudentAdapter
+    private var itemComparator: ItemComparator = ItemComparator()
     private var studentList: MutableList<Student> = mutableListOf(
         Student("Tom"), Student("Merry"),
         Student("Bob"), Student("Lucy"),
@@ -38,6 +40,15 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
         mDataBinding.recyclerView.adapter = mStudentAdapter
         Log.d(TAG, "onCreate: submitList $studentList")
 
+        mStudentAdapter.setOnIconCLickListener {
+            it.toggleStates()
+            val currentPosition = studentList.findPosition(it)
+            studentList.sortWith(itemComparator)
+            val targetIndex = studentList.findPosition(it)
+            Log.d(TAG, "HyTest notifyItemRangeChanged $targetIndex")
+            mStudentAdapter.notifyItemMoved(currentPosition, targetIndex)
+            mStudentAdapter.notifyItemRangeChanged(targetIndex, 1)
+        }
         mStudentAdapter.registerAdapterDataObserver(ListDataObserver())
         mStudentAdapter.submitList(studentList)
     }
@@ -115,7 +126,26 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
 
     }
 
-    class ListDataObserver:RecyclerView.AdapterDataObserver(){
+    class ItemComparator : Comparator<Student> {
+        override fun compare(o1: Student?, o2: Student?): Int {
+            if (o1 == null || o2 == null) return 0
+            if (o1.type == Student.ITEM_TYPE_LABEL) {
+                return if (o2.enable) 1 else -1
+            } else if (o2.type == Student.ITEM_TYPE_LABEL) {
+                return if (o1.enable) -1 else 1
+            }
+
+            if (o1.enable) {
+                return if (o2.enable) 0 else -1
+            } else if (o2.enable) {
+                return if (o1.enable) 1 else 0
+            }
+            return 0
+        }
+
+    }
+
+    class ListDataObserver : RecyclerView.AdapterDataObserver() {
         override fun onChanged() {
             log("onChanged")
         }
