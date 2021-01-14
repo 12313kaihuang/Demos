@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
         mDataBinding.recyclerView.adapter = mStudentAdapter
         Log.d(TAG, "onCreate: submitList $studentList")
         mStudentAdapter.submitList(studentList.deepCopy())
+
+        mStudentAdapter.registerAdapterDataObserver(ListDataObserver())
     }
 
     override fun onDragIconClick(item: Student, holder: StudentAdapter.StudentViewHolder) {
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
         ): Boolean {
             val from = current.adapterPosition
             val to = target.adapterPosition
-            Log.d(TAG, "canDropOver: $from to $to")
+            Log.d(TAG, "HyTest canDropOver: $from to $to")
             return super.canDropOver(recyclerView, current, target)
         }
 
@@ -84,7 +86,7 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
                     Collections.swap(list, i, i - 1)
                 }
             }
-            Log.d(TAG, "onMove: newList $list")
+            Log.d(TAG, "HyTest onMove: newList $list")
             if (!mDataBinding.recyclerView.isComputingLayout) {
                 //这一句是关键  通过使用submit的方式暂时还没有整明白要怎么弄
                 mStudentAdapter.submitList(list)
@@ -96,7 +98,7 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
          * 当用户与元素的交互结束并且还完成其动画时，由ItemTouchHelper调用。
          */
         override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-            Log.d(TAG, "clearView: ${mStudentAdapter.currentList}")
+            Log.d(TAG, "HyTest clearView: ${mStudentAdapter.currentList}")
             super.clearView(recyclerView, viewHolder)
         }
 
@@ -112,6 +114,36 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
          */
         override fun isLongPressDragEnabled(): Boolean = true
 
+    }
+
+    class ListDataObserver:RecyclerView.AdapterDataObserver(){
+        override fun onChanged() {
+            log("onChanged")
+        }
+
+        override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+            log("onItemRangeChanged $positionStart $itemCount")
+        }
+
+        override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
+            log("onItemRangeChanged $positionStart $itemCount $payload")
+        }
+
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            log("onItemRangeInserted $positionStart $itemCount")
+        }
+
+        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+            log("onItemRangeRemoved $positionStart $itemCount")
+        }
+
+        override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+            log("onItemRangeMoved $fromPosition $toPosition $itemCount")
+        }
+
+        private fun log(msg: String) {
+            Log.d(TAG, "HyTest $msg")
+        }
     }
 
     companion object {
