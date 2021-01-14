@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.itemtouchhelpertest.databinding.ActivityMainBinding
 import java.util.*
+import kotlin.Comparator
 
 class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener {
 
     lateinit var mDataBinding: ActivityMainBinding
     lateinit var mTouchHelper: ItemTouchHelper
     lateinit var mStudentAdapter: StudentAdapter
+    private var itemComparator: ItemComparator = ItemComparator()
     private var studentList: MutableList<Student> = mutableListOf(
         Student("Tom"), Student("Merry"),
         Student("Bob"), Student("Lucy"),
@@ -39,6 +41,12 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
         Log.d(TAG, "onCreate: submitList $studentList")
         mStudentAdapter.submitList(studentList.deepCopy())
 
+        mStudentAdapter.setOnIconCLickListener {
+            val list = mStudentAdapter.currentList.deepCopy()
+            list.find(it)?.toggleStates()
+            list.sortWith(itemComparator)
+            mStudentAdapter.submitList(list)
+        }
         mStudentAdapter.registerAdapterDataObserver(ListDataObserver())
     }
 
@@ -116,7 +124,26 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
 
     }
 
-    class ListDataObserver:RecyclerView.AdapterDataObserver(){
+    class ItemComparator : Comparator<Student> {
+        override fun compare(o1: Student?, o2: Student?): Int {
+            if (o1 == null || o2 == null) return 0
+            if (o1.type == Student.ITEM_TYPE_LABEL) {
+                return if (o2.enable) 1 else -1
+            } else if (o2.type == Student.ITEM_TYPE_LABEL) {
+                return if (o1.enable) -1 else 1
+            }
+
+            if (o1.enable) {
+                return if (o2.enable) 0 else -1
+            } else if (o2.enable) {
+                return if (o1.enable) 1 else 0
+            }
+            return 0
+        }
+
+    }
+
+    class ListDataObserver : RecyclerView.AdapterDataObserver() {
         override fun onChanged() {
             log("onChanged")
         }
