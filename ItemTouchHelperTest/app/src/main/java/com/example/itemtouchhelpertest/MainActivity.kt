@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
         mDataBinding.recyclerView.layoutManager = LinearLayoutManager(this)
         mDataBinding.recyclerView.adapter = mStudentAdapter
         Log.d(TAG, "onCreate: submitList $studentList")
-        mStudentAdapter.submitList(studentList)
+        mStudentAdapter.submitList(studentList.deepCopy())
     }
 
     override fun onDragIconClick(item: Student, holder: StudentAdapter.StudentViewHolder) {
@@ -72,21 +72,22 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
             viewHolder: RecyclerView.ViewHolder,
             target: RecyclerView.ViewHolder
         ): Boolean {
+            val list = mStudentAdapter.currentList.deepCopy()
             val from = viewHolder.adapterPosition
             val to = target.adapterPosition
             if (from < to) {
                 for (i in from until to) {
-                    Collections.swap(studentList, i, i + 1)
+                    Collections.swap(list, i, i + 1)
                 }
             } else {
                 for (i in from downTo to + 1) {
-                    Collections.swap(studentList, i, i - 1)
+                    Collections.swap(list, i, i - 1)
                 }
             }
-            Log.d(TAG, "onMove: newList $studentList")
+            Log.d(TAG, "onMove: newList $list")
             if (!mDataBinding.recyclerView.isComputingLayout) {
                 //这一句是关键  通过使用submit的方式暂时还没有整明白要怎么弄
-                mStudentAdapter.notifyItemMoved(from, to)
+                mStudentAdapter.submitList(list)
             }
             return true
         }
