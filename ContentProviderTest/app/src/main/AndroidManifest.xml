@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.contentprovidertest">
+
+    <!--
+        protectionLevel = normal 表示任何app都可以被授权这个权限
+
+      细分读 & 写权限如下，但本Demo直接采用全权限
+     <permission android:name="yu.hu.providertest.Write" android:protectionLevel="normal"/>
+     <permission android:name="yu.hu.providertest.PROVIDER" android:protectionLevel="normal"/>
+
+        android:protectionLevel="dangerous"
+     https://developer.android.com/guide/topics/manifest/permission-element?hl=zh-cn
+     -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <permission android:name="yu.hu.providertest.permission" android:protectionLevel="signatureOrSystem"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ContentProviderTest">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- exported 设置provider是否可以被其他进程使用
+            android:permission="yu.hu.providertest.permission"
+            readPermission/writePermission
+
+            grantUriPermissions?
+
+
+            android:grantUriPermissions="true"  //Intent临时权限？
+
+            path-permission 可以用于只开放部分路径下的权限https://blog.csdn.net/flowingflying/article/details/17412609
+           -->
+        <provider
+            android:authorities="com.example.MyContentProvider.test"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="yu.hu.providertest.permission"
+            android:name="com.example.contentprovidertest.MyContentProvider">
+
+        </provider>
+    </application>
+
+</manifest>
