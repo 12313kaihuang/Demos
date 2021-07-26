@@ -63,8 +63,8 @@ private val mCallback: ItemTouchHelper.Callback = object : ItemTouchHelper.Simpl
 
 }
 ```
-其中`onMove`方法需要重写
 
+其中`onMove`方法需要重写
 2. 创建`touchHelper`并与`recyclerView`建立交互
 ```kotlin
 mTouchHelper = ItemTouchHelper(mCallback)

@@ -1,6 +1,7 @@
 package com.example.itemtouchhelpertest
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ViewGroup
@@ -13,6 +14,12 @@ import com.example.itemtouchhelpertest.databinding.ItemStudentBinding
 class StudentAdapter(private val dragListener: OnDragIconClickListener?) :
     ListAdapter<Student, StudentAdapter.StudentViewHolder>(StudentDiffCallback()) {
 
+    private var iconClickListener:((item:Student) -> Unit)? = null
+
+    fun setOnIconCLickListener(listener: ((item:Student) -> Unit)?) {
+        iconClickListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder =
         StudentViewHolder(
             ItemStudentBinding.inflate(
@@ -21,24 +28,22 @@ class StudentAdapter(private val dragListener: OnDragIconClickListener?) :
         )
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) =
-        holder.bind(position)
+        holder.bind(getItem(position))
 
     inner class StudentViewHolder(private val mDataBinding: ItemStudentBinding) :
         RecyclerView.ViewHolder(mDataBinding.root) {
 
         @SuppressLint("ClickableViewAccessibility")
-        fun bind(position: Int) {
-            mDataBinding.student = getItem(position)
-            itemView.setOnClickListener {
-                Toast.makeText(
-                    itemView.context,
-                    "onClick ${getItem(position).name}",
-                    Toast.LENGTH_SHORT
-                ).show()
+        fun bind(data: Student) {
+            Log.d("StudentViewHolder", "bind: $data")
+            mDataBinding.student = data
+            mDataBinding.icon.setImageResource(data.icon)
+            mDataBinding.icon.setOnClickListener {
+                iconClickListener?.invoke(data)
             }
             mDataBinding.dragIv.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN) {
-                    dragListener?.onDragIconClick(position, this)
+                    dragListener?.onDragIconClick(data, this)
                 }
                 false
             }
@@ -47,13 +52,13 @@ class StudentAdapter(private val dragListener: OnDragIconClickListener?) :
 
     class StudentDiffCallback : DiffUtil.ItemCallback<Student>() {
         override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean =
-            oldItem === newItem
+            oldItem.name == newItem.name
 
         override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean =
             oldItem == newItem
     }
 
     interface OnDragIconClickListener {
-        fun onDragIconClick(position: Int, holder: StudentViewHolder)
+        fun onDragIconClick(item: Student, holder: StudentViewHolder)
     }
 }
