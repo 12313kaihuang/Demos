@@ -39,15 +39,18 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
         mDataBinding.recyclerView.layoutManager = LinearLayoutManager(this)
         mDataBinding.recyclerView.adapter = mStudentAdapter
         Log.d(TAG, "onCreate: submitList $studentList")
-        mStudentAdapter.submitList(studentList.deepCopy())
 
         mStudentAdapter.setOnIconCLickListener {
-            val list = mStudentAdapter.currentList.deepCopy()
-            list.find(it)?.toggleStates()
-            list.sortWith(itemComparator)
-            mStudentAdapter.submitList(list)
+            it.toggleStates()
+            val currentPosition = studentList.findPosition(it)
+            studentList.sortWith(itemComparator)
+            val targetIndex = studentList.findPosition(it)
+            Log.d(TAG, "HyTest notifyItemRangeChanged $targetIndex")
+            mStudentAdapter.notifyItemMoved(currentPosition, targetIndex)
+            mStudentAdapter.notifyItemRangeChanged(targetIndex, 1)
         }
         mStudentAdapter.registerAdapterDataObserver(ListDataObserver())
+        mStudentAdapter.submitList(studentList)
     }
 
     override fun onDragIconClick(item: Student, holder: StudentAdapter.StudentViewHolder) {
@@ -94,7 +97,7 @@ class MainActivity : AppCompatActivity(), StudentAdapter.OnDragIconClickListener
                     Collections.swap(list, i, i - 1)
                 }
             }
-            Log.d(TAG, "HyTest onMove: newList $list")
+            Log.d(TAG, "yTest onMove: newList $studentList")
             if (!mDataBinding.recyclerView.isComputingLayout) {
                 //这一句是关键  通过使用submit的方式暂时还没有整明白要怎么弄
                 mStudentAdapter.submitList(list)

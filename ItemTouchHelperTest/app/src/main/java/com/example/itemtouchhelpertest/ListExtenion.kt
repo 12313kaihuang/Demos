@@ -14,3 +14,11 @@ fun List<Student>.find(item: Student): Student? {
     }
     return null
 }
+
+fun List<Student>.findPosition(target:Student):Int {
+    var index = -1
+    forEachIndexed{ i, student ->
+        if (student.name == target.name) index = i
+    }
+    return index
+}
