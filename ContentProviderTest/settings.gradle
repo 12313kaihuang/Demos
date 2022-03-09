@@ -1,3 +1,0 @@
-include ':contentresolvertest'
-include ':app'
-rootProject.name = "ContentProviderTest"

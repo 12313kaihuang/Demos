@@ -1,3 +1,0 @@
-include ':libjetpack'
-include ':app'
-rootProject.name = "StudentList"

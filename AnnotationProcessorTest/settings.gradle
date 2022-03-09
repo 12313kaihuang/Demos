@@ -1,2 +1,0 @@
-include ':app', ':libmyannotationprocessor'
-rootProject.name='AnnotationProcessorTest'

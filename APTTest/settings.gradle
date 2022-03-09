@@ -1,5 +1,0 @@
-include ':libcompiler2'
-include ':libcompiler'
-include ':libannotation'
-include ':app'
-rootProject.name = "APTTest"

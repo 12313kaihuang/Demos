@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">SplashDemo</string>
-    <string name="img">img</string>
-    <string name="skip_with_seconds">跳过 %d s</string>
-</resources>

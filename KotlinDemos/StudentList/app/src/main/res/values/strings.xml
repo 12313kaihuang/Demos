@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">StudentList</string>
-    <string name="add">add</string>
-    <string name="name">name</string>
-    <string name="age">age</string>
-</resources>

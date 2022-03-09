@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <dimen name="icon_size">55dp</dimen>
-    <dimen name="icon_size_large">88dp</dimen>
-    <dimen name="icon_padding_size">8dp</dimen>
-    <dimen name="player_padding_size">20dp</dimen>
-
-</resources>
